@@ -44,7 +44,7 @@ Add the following lines, replacing `<PROXY_IP>` and `<PORT>` with your proxy det
 
 ```
 Acquire::http::Proxy "http://<PROXY_IP>:<PORT>/";
-Acquire::https::Proxy "https://<PROXY_IP>:<PORT>/";
+Acquire::https::Proxy "http://<PROXY_IP>:<PORT>/";
 ```
 
 Save and exit, then update your package list:
