@@ -40,11 +40,14 @@ To configure a proxy for APT package updates, edit the APT configuration file:
 sudo nano /etc/apt/apt.conf.d/proxy.conf
 ```
 
-Add the following lines, replacing `<PROXY_IP>` and `<PORT>` with your proxy details:
+Add the following lines, replacing `<PROXY_IP>` and `<PORT>` with your proxy details. This IP and Port should Privoxy:
 
 ```
 Acquire::http::Proxy "http://<PROXY_IP>:<PORT>/";
 Acquire::https::Proxy "http://<PROXY_IP>:<PORT>/";
+Acquire::http::Proxy {
+	<PROXY_IP> DIRECT;
+}
 ```
 
 Save and exit, then update your package list:
@@ -53,9 +56,23 @@ Save and exit, then update your package list:
 sudo apt update
 ```
 
-Alternatively, you can set an environment variable for temporary proxy use:
+Also, override the default sources list. This IP and Port should match Nginx:
 
 ```
-export http_proxy="http://<PROXY_IP>:<PORT>"
-export https_proxy="https://<PROXY_IP>:<PORT>"
+echo 'deb http://<PROXY_IP>:<PORT>/kali kali-rolling main contrib non-free non-free-firmware' > /etc/apt/sources.list
+```
+
+
+Example /etc/apt/sources.list
+```
+deb http://127.0.0.1:9999/kali kali-rolling main contrib non-free non-free-firmware
+```
+
+Example /etc/apt/apt.conf.d/proxy.conf
+```
+Acquire::http::Proxy "http://127.0.0.1:8118/";
+Acquire::https::Proxy "http://127.0.0.1:8118/";
+Acquire::http::Proxy {
+    127.0.0.1 DIRECT;
+}
 ```

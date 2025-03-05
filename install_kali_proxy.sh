@@ -11,3 +11,14 @@ systemctl restart nginx
 
 echo "Setting Nginx to start on boot..."
 systemctl enable nginx
+
+
+echo "Installing Privoxy..."
+apt install -y privoxy
+
+echo "Copying config..."
+cp -f privoxy_config /etc/privoxy_config
+
+echo "Restarting and Enabling Privoxy to start on boot..."
+systemctl restart privoxy
+systemctl enable privoxy
