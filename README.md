@@ -23,6 +23,8 @@ When performing penetration testing, using a proxy for Kali Linux system updates
 - Some networks block access to Kali repositories.
 - A proxy (or tunneling updates through SSH or a VPN) can help circumvent such restrictions and ensure smooth updates.
 
+## NOTE: this guide assumes you can connect back to the server over a secure channel like Tailscale or Wireguard.
+
 ## How to Configure a Proxy for Kali Updates on the Server Side
 This assumes Nginx isn't used for anything else on this system
 ```
